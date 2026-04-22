@@ -1,5 +1,3 @@
-# Myntra-pm-Funnel-dashboard
-E-commerce conversion funnel analytics dashboard with AI insights — PM Intern Project
 # FunnelIQ – E-commerce Conversion Analytics Dashboard
 
 A product analytics dashboard built as part of my PM Intern application to Myntra.
