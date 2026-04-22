@@ -369,7 +369,7 @@
   <!-- AI SECTION -->
   <div class="ai-section">
     <div class="ai-header">
-      <span class="ai-tag">✦ AI-Powered</span>
+      <span class="ai-tag">✦ PM Insights</span>
       <span class="ai-title">Product Manager Insights Engine</span>
     </div>
     <div class="ai-input-row">
@@ -423,7 +423,7 @@
 </main>
 
 <footer>
-  Built by <strong>[Your Name]</strong> · PM Intern Project · Powered by Claude AI · Data is illustrative
+  Built by <strong>Ansh Arora</strong> · Product Management Internship Project · E-commerce Funnel Analytics Dashboard · Data is illustrative
 </footer>
 
 <script>
@@ -736,61 +736,38 @@ function setFilter(btn, key) {
 }
 
 // ── AI QUERY ──────────────────────────────────────────────────────────────────
-async function askAI() {
-  const btn = document.getElementById('aiBtn');
+function askAI() {
   const out = document.getElementById('aiOutput');
   const q = document.getElementById('aiQuery').value;
 
-  const d = DATA[currentFilter];
-  const funnelSummary = d.funnel.map((s,i) => {
-    const drop = i===0 ? '' : ` (${((d.funnel[i-1].users - s.users)/d.funnel[i-1].users*100).toFixed(1)}% drop from previous)`;
-    return `${s.stage}: ${s.users.toLocaleString()}${drop}`;
-  }).join('\n');
-  const kpiSummary = d.kpis.map(k => `${k.label}: ${k.value} (${k.change})`).join(', ');
+  const responses = {
+    drop: `• Improve PDP trust signals (reviews, ratings, size guide)
+• Add urgency cues (low stock, limited deals)
+• Optimize Add-to-Cart CTA visibility on mobile`,
 
-  const prompt = `You are a Senior Product Manager at Myntra, India's leading fashion e-commerce platform.
+    search: `• Improve search ranking using click-through data
+• Add autocomplete & trending searches
+• Personalize results based on user behavior`,
 
-Current funnel data (filter: ${currentFilter}):
-${funnelSummary}
+    mobile: `• Reduce page load time
+• Simplify checkout UX
+• Optimize button placement for thumb usage`,
 
-KPIs: ${kpiSummary}
+    return: `• Launch loyalty program
+• Push personalized notifications
+• Offer repeat purchase discounts`,
 
-Question: ${q}
+    kpi: `• Track checkout completion rate
+• Measure payment failure rate
+• Monitor time-to-complete checkout`,
 
-Give a concise, actionable PM response (3-5 bullet points). Use PM frameworks like AARRR, ICE scoring, Jobs-to-be-Done where relevant. Be specific to fashion e-commerce. Start each bullet with a bold action verb.`;
+    ab: `• Test search bar visibility
+• Variant A: top placement, Variant B: sticky search
+• Measure CTR and downstream conversion`
+  };
 
-  btn.disabled = true;
-  out.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
-
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }]
-      })
-    });
-    const data = await res.json();
-    const text = data.content?.map(c => c.text || '').join('') || 'No response received.';
-    out.innerHTML = '';
-    // Typewriter effect
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i < text.length) {
-        out.textContent += text[i++];
-      } else {
-        clearInterval(interval);
-      }
-    }, 12);
-  } catch(e) {
-    out.innerHTML = `<span style="color:var(--red)">Error: ${e.message}. Check your internet connection.</span>`;
-  } finally {
-    btn.disabled = false;
-  }
+  out.textContent = responses[q];
 }
-
 // ── INIT ──────────────────────────────────────────────────────────────────────
 (function init() {
   const d = DATA['7d'];
