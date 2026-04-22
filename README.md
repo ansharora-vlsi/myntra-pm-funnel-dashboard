@@ -16,7 +16,7 @@ E-commerce platforms like Myntra lose significant revenue due to drop-offs at va
 - **Category CVR** – Performance by product category
 
 ## 🛠️ Tech Stack
-HTML, CSS, JavaScript, Claude AI API
+HTML, CSS, JavaScript
 
 ## 🔗 Live Demo
 [View Dashboard](https://ansharora-vlsi.github.io/myntra-pm-funnel-dashboard/)
